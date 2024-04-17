@@ -91,7 +91,7 @@ User ID can be numeric (see [Define user ID type](/basics/users#define-user-id-t
 import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
 
 import sqlite from "better-sqlite3";
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, int } from "drizzle-orm/sqlite-core";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 
 const sqliteDB = sqlite(":memory:");
@@ -106,7 +106,7 @@ const sessionTable = sqliteTable("session", {
 	userId: text("user_id")
 		.notNull()
 		.references(() => userTable.id),
-	expiresAt: integer("expires_at").notNull()
+	expiresAt: int("expires_at").notNull()
 });
 
 const adapter = new DrizzleSQLiteAdapter(db, sessionTable, userTable);
